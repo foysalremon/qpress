@@ -1,0 +1,56 @@
+@import 'variables.scss';
+.admin {
+  min-height: 100vh;
+  display: flex;
+}
+.adminNav {
+  width: 240px;
+  background-color: $primary;
+  height: 100vh;
+  overflow: hidden;
+}
+.adminMenu {
+  list-style: none;
+  margin: 0;
+  padding: 8px 0;
+  li {
+    a {
+      display: block;
+      color: #aaaaaa;
+      text-decoration: none;
+      line-height: 2rem;
+      padding: 14px 16px;
+      margin: 0 0 0 14px;
+      font-size: 1.4rem;
+      border-radius: 5px 0 0 5px;
+      svg {
+        margin-right: 10px;
+        font-size: 1.8rem;
+        min-width: 24px;
+        vertical-align: middle;
+      }
+      &:hover {
+        background-color: $primaryActive;
+        color: white;
+      }
+    }
+    &.active {
+      a {
+        background-color: $primaryActive;
+        color: white;
+      }
+    }
+  }
+}
+.adminSubMenu {
+  color: #aaaaaa;
+  display: none;
+}
+
+.mainbar {
+  flex-grow: 1;
+}
+.topbar {
+  border-bottom: 1px solid rgba(black, 0.12);
+  background-color: white;
+}
