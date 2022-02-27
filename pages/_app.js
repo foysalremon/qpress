@@ -2,6 +2,7 @@ import { SessionProvider } from 'next-auth/react';
 import Head from 'next/head';
 import { RecoilRoot } from 'recoil';
 import Loader from '../components/Loader';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/globals.scss';
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {

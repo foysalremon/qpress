@@ -1,0 +1,32 @@
+@import 'variables.scss';
+.avatar {
+  border: 1px solid rgba(black, 0.12);
+  padding: 1px;
+  border-radius: 50%;
+  overflow: hidden;
+  span,
+  img {
+    vertical-align: middle;
+  }
+  span {
+    border-radius: 50%;
+    overflow: hidden;
+  }
+}
+
+.imagePlacehold {
+  height: 40px;
+  width: 40px;
+  display: block;
+  position: relative;
+  span {
+    position: absolute;
+    text-transform: uppercase;
+    color: $primary;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 400;
+    font-size: 2rem;
+  }
+}

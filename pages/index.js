@@ -6,11 +6,6 @@ export default function Home() {
     <>
       <Head>
         <title>Q Press</title>
-        <meta
-          name="description"
-          content="WordPress Clone with React Next.JS, MongoDB..."
-        />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
     </>
   );

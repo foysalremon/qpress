@@ -1,0 +1,21 @@
+.uploader {
+  border: 2px dashed rgba(black, 0.12);
+  border-radius: 4px;
+  position: relative;
+  text-align: center;
+  padding: 35px 15px;
+  cursor: pointer;
+  * {
+    pointer-events: none;
+  }
+  input {
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+  }
+  svg {
+    height: 2rem;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+}

@@ -9,8 +9,9 @@ import {
   faUsers,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
+import { Container } from 'react-bootstrap';
 import styles from '../styles/Admin.module.scss';
 import Avatar from './Avatar';
 
@@ -84,10 +85,25 @@ const Admin = ({ children, active, title, user }) => {
       </div>
       <div className={styles.mainbar}>
         <header className={styles.topbar}>
-          <h1 className={styles.adminTitle}>{title} - QPress</h1>
-          <Avatar user={session.user} />
+          <Container fluid>
+            <div className="flex">
+              <h1 className={styles.adminTitle}>{title} - QPress</h1>
+              <button
+                onClick={() => signOut()}
+                style={{
+                  border: 'none',
+                  padding: 0,
+                  backgroundColor: 'transparent',
+                }}
+              >
+                <Avatar user={session?.user} />
+              </button>
+            </div>
+          </Container>
         </header>
-        {children}
+        <div className={styles.childbar}>
+          <Container fluid>{children}</Container>
+        </div>
       </div>
     </div>
   );
