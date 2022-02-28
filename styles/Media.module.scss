@@ -1,3 +1,4 @@
+@import 'variables.scss';
 .uploader {
   border: 2px dashed rgba(black, 0.12);
   border-radius: 4px;
@@ -17,5 +18,88 @@
     height: 2rem;
     margin-right: 10px;
     vertical-align: middle;
+  }
+}
+
+.imageList {
+  text-align: center;
+  margin: 16px -4px -4px;
+  font-size: 0;
+}
+
+.imageWrap {
+  display: inline-block;
+  vertical-align: middle;
+  background-color: rgba(black, 0.12);
+  padding: 2px;
+  border-radius: 2px;
+  overflow: hidden;
+  min-width: 184px;
+  min-height: 184px;
+  margin: 4px;
+  position: relative;
+}
+.circularProgress {
+  width: 80px;
+  height: 80px;
+
+  border: 2px solid #f3f3f3;
+  border-top: 3px solid #f25a41;
+  border-radius: 100%;
+
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+
+  animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.actionIcons {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 10px;
+  opacity: 0;
+}
+
+.image {
+  &:hover {
+    .actionIcons {
+      opacity: 1;
+    }
+  }
+}
+
+.actionBtn {
+  background-color: #f1f1f1;
+  color: $primary;
+  display: inline-block;
+  border: none;
+  padding: 0;
+  min-width: 30px;
+  line-height: 30px;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+  &:hover {
+    color: white;
+    background-color: $primary;
+  }
+  + .actionBtn {
+    margin-left: 5px;
+  }
+  svg {
+    height: 14px;
   }
 }
