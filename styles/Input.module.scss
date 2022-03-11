@@ -1,0 +1,54 @@
+.inputWrap {
+  position: relative;
+  display: block;
+  margin-bottom: 20px;
+  cursor: text;
+  select,
+  input,
+  textarea {
+    margin: 0;
+    background-color: transparent !important;
+    &:-internal-autofill-selected {
+      background-color: inherit;
+    }
+  }
+}
+
+.placeholder {
+  position: absolute;
+  top: 50%;
+  left: 18px;
+  transform: translateY(-50%);
+  color: #888888;
+  transition: all 0.3s ease;
+  background-color: white;
+  padding: 0 2px;
+  textarea + & {
+    top: 24px;
+  }
+  select + &,
+  input:focus + &,
+  input:not(:placeholder-shown) + &,
+  textarea:focus + &,
+  textarea:not(:placeholder-shown) + & {
+    top: 0;
+    font-size: small;
+  }
+}
+
+.checklistWrap {
+  label {
+    display: block;
+  }
+  input {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  span {
+    display: inline-block;
+    vertical-align: middle;
+  }
+}

@@ -1,45 +1,57 @@
-import { useState } from 'react';
-import {
-  faCloudUpload,
-  faEdit,
-  faTrash,
-} from '@fortawesome/free-solid-svg-icons';
+import { useEffect, useState } from 'react';
+import { faCloudUpload } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, Card } from 'react-bootstrap';
 import styles from '../styles/Media.module.scss';
 import axios from 'axios';
-import Image from 'next/image';
+import { useRecoilState } from 'recoil';
+import { errorState } from '../atoms/errorAtom';
+import { handleMediaState, useSSRMediasState } from '../atoms/mediaState';
+import MediaSingle from './Media';
 
 const Media = ({ medias, imagePickerHandler }) => {
-  const [uploadingImg, setUploadingImg] = useState([]);
-  const [count, setCount] = useState(0);
+  const [realtimeMedias, setRealtimeMedias] = useState({});
+  const [handleMedia, setHandleMedia] = useRecoilState(handleMediaState);
+  const [useSSRMedias, setUseSSRMedias] = useRecoilState(useSSRMediasState);
+  const [error, setError] = useRecoilState(errorState);
+
+  useEffect(() => {
+    const fetchMedias = async () => {
+      const response = await axios.get(`/api/media`).then((r) => r.data);
+      setRealtimeMedias(response);
+      setHandleMedia(false);
+      setUseSSRMedias(false);
+    };
+    fetchMedias();
+  }, [handleMedia]);
 
   const fileSelectedHandler = (event) => {
-    if (count < 50) {
+    if (
+      (!useSSRMedias && realtimeMedias.count < 50) ||
+      (useSSRMedias && medias.count < 50)
+    ) {
       Array.from(event.target.files).map(async (file, i) => {
+        setError({ state: 'info', message: 'Be patient, media is uploading' });
         let timeId = new Date().valueOf() + '_' + i;
         const formData = new FormData();
-        let oldUploading = uploadingImg;
-        oldUploading.push({ name: file.name, state: 'uploading', timeId });
-        setUploadingImg(oldUploading);
         formData.append(timeId, file);
-        const media = await axios
+        const { data: media } = await axios
           .post('/api/media', formData)
           .then((r) => r.data);
-        if (media?.status !== 'error') {
-          setUploadingImg(
-            uploadingImg.map((img) =>
-              img.timeId === media.timeId ? media : img
-            )
-          );
+        if (media?.state !== 'error') {
+          setHandleMedia(true);
+        } else {
+          setError(media);
         }
-        return false;
+        return setError({
+          state: 'success',
+          message: 'Uploading media successful',
+        });
       });
     } else {
+      setError({ state: 'error', message: 'Sorry, upload limit exceeded' });
     }
   };
-
-  const deleteHandler = () => {};
 
   return (
     <Card>
@@ -56,80 +68,35 @@ const Media = ({ medias, imagePickerHandler }) => {
         </Button>
       </label>
       <div className={styles.imageList}>
-        {uploadingImg.length > 0 ? (
+        {!useSSRMedias ? (
           <>
-            {uploadingImg.map((file, index) => (
-              <div className={styles.imageWrap} key={index}>
-                <div className={styles.image}>
-                  {file?.state === 'uploading' ? (
-                    <div className={styles.circularProgress}></div>
-                  ) : (
-                    <>
-                      <Image
-                        src={file.thumb}
-                        alt={file.alt}
-                        className={styles.imageMedia}
-                        data-id={file._id}
-                        width={180}
-                        height={180}
-                        onClick={imagePickerHandler}
-                      />
-                      <div className={actionIcons}>
-                        <a
-                          className={styles.actionEdit}
-                          href={`/admin/media/${file._id}`}
-                        >
-                          <FontAwesomeIcon icon={faEdit} />
-                        </a>
-                        <button
-                          className={styles.actionDelete}
-                          onClick={() => deleteHandler(file._id)}
-                        >
-                          <FontAwesomeIcon icon={faDeleteLeft} />
-                        </button>
-                      </div>
-                    </>
-                  )}
-                </div>
-              </div>
-            ))}
+            {realtimeMedias.count > 0 ? (
+              <>
+                {realtimeMedias.medias.map((file) => (
+                  <MediaSingle
+                    key={file._id}
+                    file={file}
+                    imagePickerHandler={imagePickerHandler}
+                  />
+                ))}
+              </>
+            ) : null}
           </>
-        ) : null}
-        {medias.length > 0 ? (
+        ) : (
           <>
-            {medias.map((file, index) => (
-              <div className={styles.imageWrap} key={index}>
-                <div className={styles.image}>
-                  <>
-                    <Image
-                      src={file.thumb}
-                      alt={file.alt}
-                      className={styles.imageMedia}
-                      data-id={file._id}
-                      width={180}
-                      height={180}
-                      onClick={imagePickerHandler}
-                    />
-                    <div className={styles.actionIcons}>
-                      <a
-                        className={styles.actionBtn}
-                        href={`/admin/media/${file._id}`}
-                      >
-                        <FontAwesomeIcon icon={faEdit} />
-                      </a>
-                      <button
-                        className={styles.actionBtn}
-                        onClick={() => deleteHandler(file._id)}
-                      >
-                        <FontAwesomeIcon icon={faTrash} />
-                      </button>
-                    </div>
-                  </>
-                </div>
-              </div>
-            ))}
+            {medias.count > 0 ? (
+              <>
+                {medias.medias.map((file) => (
+                  <MediaSingle
+                    key={file._id}
+                    file={file}
+                    imagePickerHandler={imagePickerHandler}
+                  />
+                ))}
+              </>
+            ) : null}
           </>
-        ) : null}
+        )}
       </div>
     </Card>
   );

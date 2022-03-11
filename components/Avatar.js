@@ -9,7 +9,20 @@ const Avatar = ({ user }) => {
   return (
     <div className={styles.avatar}>
       {user.image ? (
-        <Image src={user.image} alt={user.name} width="40" height="40" />
+        <Image
+          src={
+            user.avatar
+              ? user.avatar.thumb
+              : user.image
+              ? user.image
+              : user.name
+              ? user.name.charAt(0)
+              : user.email.charAt(0)
+          }
+          alt={user.name ? user.name : user.email}
+          width="40"
+          height="40"
+        />
       ) : (
         <span className={styles.imagePlacehold}>
           <span>{user.name ? user.name.charAt(0) : user.email.charAt(0)}</span>

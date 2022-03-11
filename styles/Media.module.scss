@@ -92,6 +92,9 @@
   line-height: 30px;
   border-radius: 3px;
   transition: all 0.3s ease;
+  * {
+    pointer-events: none;
+  }
   &:hover {
     color: white;
     background-color: $primary;
@@ -102,4 +105,19 @@
   svg {
     height: 14px;
   }
+}
+
+.singImageWrap {
+  position: relative;
+  padding: 15px;
+  span {
+    position: static !important;
+    img {
+      position: static !important;
+    }
+  }
+}
+
+.editImage {
+  padding: 30px;
 }

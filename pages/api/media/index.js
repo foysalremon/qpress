@@ -55,9 +55,9 @@ handler.post(async (req, res) => {
 handler.get(async (req, res) => {
   try {
     const medias = await Media.find().sort({ createdAt: -1 });
-    res.status(200).json(medias);
+    const count = await Media.countDocuments({});
+    res.status(200).json({ count, medias });
   } catch (error) {
-    console.log(error.message);
     res.json({ status: 'error', message: error.message });
   }
 });

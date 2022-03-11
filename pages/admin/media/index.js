@@ -1,8 +1,8 @@
 import { getSession } from 'next-auth/react';
 import axios from 'axios';
 import Head from 'next/head';
-import Admin from '../../components/Admin';
-import Medias from '../../components/Medias';
+import Admin from '../../../components/Admin';
+import Medias from '../../../components/Medias';
 
 const Media = ({ medias }) => {
   return (

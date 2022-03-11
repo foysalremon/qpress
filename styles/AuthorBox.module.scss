@@ -1,0 +1,55 @@
+.authorBox {
+  padding: 0;
+  overflow: hidden;
+  text-align: center;
+  .cover {
+    height: 0;
+    padding-top: 56.25%;
+    background-size: cover;
+    background-position: center center;
+  }
+  .content {
+    padding: 0 30px;
+    h5 {
+      margin: 70px 0 0;
+      line-height: 1;
+    }
+  }
+  .thumb {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border: 2px solid #aaaaaa;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: white;
+    margin: -50px auto;
+  }
+  .socials {
+    display: flex;
+    margin: 0 -30px;
+    a {
+      display: inline-block;
+      font-size: 2.4rem;
+      flex: 1;
+      background-color: #333333;
+      padding: 7px 12px;
+      svg {
+        height: 2.4rem;
+        color: white;
+      }
+    }
+    .facebook {
+      background-color: #4e7bc0;
+    }
+    .twitter {
+      background-color: #00bff3;
+    }
+    .github {
+      background-color: #24292f;
+    }
+    .linkedin {
+      background-color: #075a94;
+    }
+  }
+}

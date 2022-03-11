@@ -15,7 +15,7 @@ import { Container } from 'react-bootstrap';
 import styles from '../styles/Admin.module.scss';
 import Avatar from './Avatar';
 
-const Admin = ({ children, active, title, user }) => {
+const Admin = ({ children, active, subactive, title, user }) => {
   const { data: session } = useSession();
 
   const pages = [
@@ -25,7 +25,7 @@ const Admin = ({ children, active, title, user }) => {
       icon: faEdit,
       url: '/admin/posts',
       children: [
-        { label: 'All Post', url: '/admin/posts' },
+        { label: 'All Posts', url: '/admin/posts' },
         { label: 'Add Post', url: '/admin/posts/post-edit' },
         { label: 'Categories', url: '/admin/posts/categories' },
         { label: 'Tags', url: '/admin/posts/tags' },
@@ -73,7 +73,14 @@ const Admin = ({ children, active, title, user }) => {
               {page.children && page.children.length ? (
                 <ul className={styles.adminSubMenu}>
                   {page.children.map((item) => (
-                    <li key={`sub-${item.label}`}>
+                    <li
+                      key={`sub-${item.label}`}
+                      className={
+                        subactive && subactive === item.label
+                          ? styles.active
+                          : ''
+                      }
+                    >
                       <Link href={item.url}>{item.label}</Link>
                     </li>
                   ))}

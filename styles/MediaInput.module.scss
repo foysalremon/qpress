@@ -1,0 +1,12 @@
+.inputWrap {
+  position: relative;
+  display: block;
+  margin-bottom: 20px;
+  input {
+    margin: 0;
+    background-color: transparent !important;
+    &:-internal-autofill-selected {
+      background-color: inherit;
+    }
+  }
+}

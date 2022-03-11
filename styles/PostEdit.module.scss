@@ -1,0 +1,37 @@
+.mediaInputWrap {
+  display: block;
+  position: relative;
+  border-radius: 4px;
+  margin: -20px -12px;
+  .placeholder {
+    position: absolute;
+    top: 0;
+    left: 18px;
+    transform: translateY(-50%);
+    color: #888888;
+    transition: all 0.3s ease;
+    background-color: white;
+    padding: 0 2px;
+    font-size: small;
+  }
+  button {
+    display: block;
+    width: 100%;
+    border: none;
+    background-color: #efefef;
+    text-align: center;
+    padding: 4px;
+    svg {
+      height: 50px;
+      width: 50px;
+      padding: 75px 15px;
+      box-sizing: content-box;
+      color: #888888;
+    }
+  }
+  img {
+    max-width: 100%;
+    height: auto;
+    box-sizing: content-box;
+  }
+}

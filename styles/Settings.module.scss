@@ -1,0 +1,39 @@
+.mediaInputWrap {
+  margin-bottom: 20px;
+  display: block;
+  position: relative;
+  border: 1px solid rgba(black, 0.12);
+  border-radius: 4px;
+  padding: 8px;
+  .placeholder {
+    position: absolute;
+    top: 0;
+    left: 18px;
+    transform: translateY(-50%);
+    color: #888888;
+    transition: all 0.3s ease;
+    background-color: white;
+    padding: 0 2px;
+    font-size: small;
+  }
+  button {
+    display: block;
+    width: 100%;
+    border: none;
+    background-color: #efefef;
+    text-align: center;
+    svg {
+      height: 50px;
+      width: 50px;
+      padding: 30px 15px;
+      box-sizing: content-box;
+      color: #888888;
+    }
+  }
+  img {
+    max-height: 40px;
+    width: auto;
+    padding: 15px;
+    box-sizing: content-box;
+  }
+}

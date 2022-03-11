@@ -32,6 +32,12 @@ export default NextAuth({
   },
   secret: process.env.SECRET,
   adapter: MongoDBAdapter(clientPromise),
+  callbacks: {
+    async session({ session, user, token }) {
+      session.user._id = token.sub;
+      return session;
+    },
+  },
   session: {
     strategy: 'jwt',
   },
